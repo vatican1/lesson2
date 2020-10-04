@@ -10,6 +10,10 @@ class Calculator:
             self.value += args
             return self
 
+    def __setattr__(self, key, value):
+        if len(self.__dict__) < 12:
+            self.__dict__[key] = value
+
     def __sub__(self, args):
         if isinstance(args, Calculator):
             self.value -= args.value
@@ -43,7 +47,10 @@ class Calculator:
             return self
 
     def __str__(self):
-        return str(self.value)
+        return str(self.__dict__)
+
+    def __iter__(self):
+        return self.value
 
 
-print((Calculator(2) + Calculator(5) - Calculator(6))*Calculator(3)**2/Calculator(3))
+print((Calculator(2) + Calculator(5) - Calculator(6)) * Calculator(3) ** 2 / Calculator(3))
